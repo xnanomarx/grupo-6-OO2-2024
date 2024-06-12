@@ -20,5 +20,12 @@ public class Producto {
     @Column(name = "nombre", unique = false, nullable = false, length = 45)
     private String nombre;
 
-    
+    @Column(name = "descripcion", unique = false, nullable = false, length = 45)
+    private String descripcion;
+
+    @Column(name = "costo", unique = false, nullable = false)
+    private double costo;
+
+    @Column(name = "precioVenta", unique = false, nullable = false)
+    private double precioVenta;
 }
