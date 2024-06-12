@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:mysql://localhost/baseprueba?serverTimezone=GMT-3
-    username: root
-    password: 150721
+    username: ${}
+    password: ${}
   jpa:
     show-sql: true
     hibernate:
