@@ -1,7 +1,7 @@
 package com.unla.grupo3.controllers;
 
-import com.unla.grupo3.entities.User;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +18,7 @@ public class HomeController {
 	@GetMapping("/index")
 	public ModelAndView index() {
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDEX);
-		org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		modelAndView.addObject("username", user.getUsername());
 		return modelAndView;
 	}
