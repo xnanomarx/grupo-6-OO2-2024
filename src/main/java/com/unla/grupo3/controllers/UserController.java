@@ -29,7 +29,7 @@ public class UserController {
 
 	@GetMapping("/loginsuccess")
 	public String loginCheck() {
-		//User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		//user.getUserRoles()
 		return "redirect:/user";
 	}
