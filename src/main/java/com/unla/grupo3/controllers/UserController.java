@@ -1,12 +1,12 @@
 package com.unla.grupo3.controllers;
 
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.unla.grupo3.entities.User;
 import com.unla.grupo3.helpers.ViewRouteHelper;
 
 
@@ -29,8 +29,16 @@ public class UserController {
 
 	@GetMapping("/loginsuccess")
 	public String loginCheck() {
-		//User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		//user.getUserRoles()
 		return "redirect:/user";
 	}
+
+	@GetMapping("/user")
+	public String userHome(Model model) {
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("username", user.getUsername());
+		return ViewRouteHelper.INDEX; // Asegúrate de que esta vista exista
+	}
+
 }
