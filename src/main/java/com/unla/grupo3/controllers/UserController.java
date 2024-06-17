@@ -41,4 +41,11 @@ public class UserController {
 		return ViewRouteHelper.INDEX;
 	}
 
+	@GetMapping("/register")
+	public String showRegistrationForm(Model model) {
+		return "register";
+	}
+
+
+
 }
