@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.UUID;
 
-@Service("prpductoService")
+@Service("productoService")
 public class ProductoService {
 
     private IProductoRepository productoRepository;
@@ -46,4 +46,9 @@ public class ProductoService {
     public void guardarProducto(Producto producto) {
         productoRepository.save(producto);
     }
+
+    public List<Producto> traerProductos(){
+        return productoRepository.findAll();
+    }
+
 }

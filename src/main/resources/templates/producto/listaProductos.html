@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Productos</title>
+    <link rel="stylesheet" href="/css/listaProductos.css">
+</head>
+<body>
+<h1>Lista de Productos</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Código</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Costo</th>
+        <th>Precio de Venta</th>
+        <th>Cantidad</th>
+        <th>Cantidad Mínima</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="stock : ${stocks}" th:classappend="${stock.cantExistente} < ${stock.cantMinima} ? 'stock-bajo' : ''">
+        <td th:text="${stock.producto.codigo}">Codigo</td>
+        <td th:text="${stock.producto.nombre}">Nombre</td>
+        <td th:text="${stock.producto.descripcion}">Descripción</td>
+        <td th:text="${stock.producto.costo}">Costo</td>
+        <td th:text="${stock.producto.precioVenta}">Precio de Venta</td>
+        <td th:text="${stock.cantExistente}">Cantidad</td>
+        <td th:text="${stock.cantMinima}">Cantidad Minima</td>
+        <td>
+            <button th:if="${stock.cantExistente} < ${stock.cantMinima}">Alerta de Abastecimiento</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="/index" class="volver">Volver</a>
+
+
+</body>
+</html>
