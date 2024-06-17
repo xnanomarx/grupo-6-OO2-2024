@@ -15,6 +15,8 @@ public interface IStockRepository extends JpaRepository<Stock, Serializable> {
     @Query("SELECT s FROM Stock s JOIN FETCH s.producto p WHERE p.codigo = (:codigo)")
     public abstract Stock findByCodigoAndFetchProductoEagerly(@Param("codigo") String codigo);
 
+
+
     @Query("SELECT s FROM Stock s JOIN FETCH s.producto")
     public abstract List<Stock> traerStocksConProducto();
 

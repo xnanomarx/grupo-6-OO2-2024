@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service("stockService")
 public class StockService {
@@ -40,5 +41,10 @@ public class StockService {
         lowStock.addAll(normalStock);
         return lowStock;
     }
+
+    public void eliminarStock(int id) {
+        stockRepository.deleteById(id);
+    }
+
 
 }

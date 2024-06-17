@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Lista de Productos</title>
@@ -18,6 +18,7 @@
         <th>Cantidad</th>
         <th>Cantidad Mínima</th>
         <th>Acciones</th>
+        <th>Dar de baja</th>
     </tr>
     </thead>
     <tbody>
@@ -25,10 +26,15 @@
         <td th:text="${stock.producto.codigo}">Codigo</td>
         <td th:text="${stock.producto.nombre}">Nombre</td>
         <td th:text="${stock.producto.descripcion}">Descripción</td>
-        <td th:text="${stock.producto.costo}">Costo</td>
-        <td th:text="${stock.producto.precioVenta}">Precio de Venta</td>
+        <td th:text="${stock.producto.costo}" >Costo</td>
+        <td th:text="${stock.producto.precioVenta}" >Precio de Venta</td>
         <td th:text="${stock.cantExistente}">Cantidad</td>
         <td th:text="${stock.cantMinima}">Cantidad Minima</td>
+        <td>
+            <form th:action="@{/producto/baja/{id}(id=${stock.id})}" method="post">
+                <button type="submit">Dar de baja</button>
+            </form>
+        </td>
         <td>
             <button th:if="${stock.cantExistente} < ${stock.cantMinima}">Alerta de Abastecimiento</button>
         </td>
@@ -36,7 +42,5 @@
     </tbody>
 </table>
 <a href="/index" class="volver">Volver</a>
-
-
 </body>
 </html>

@@ -5,12 +5,14 @@ import com.unla.grupo3.entities.Stock;
 import com.unla.grupo3.services.implementation.ProductoService;
 import com.unla.grupo3.services.implementation.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/producto")
@@ -54,5 +56,10 @@ public class ProductoController {
         return "producto/listaProductos";
     }
 
+    @PostMapping("/baja/{id}")
+    public RedirectView darDeBajaProducto(@PathVariable("id") int id) {
+        stockService.eliminarStock(id);
+        return new RedirectView("/producto/lista");
+    }
 
 }
