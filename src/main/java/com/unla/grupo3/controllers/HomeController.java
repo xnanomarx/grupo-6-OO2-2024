@@ -35,9 +35,4 @@ public class HomeController {
 		return new RedirectView(ViewRouteHelper.ROUTE);
 	}
 
-	@GetMapping("/register")
-	public String testRedirect() {
-		return "redirect:/producto/register";
-	}
-
 }

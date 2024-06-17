@@ -25,7 +25,6 @@ public class ProductoController {
 
     @GetMapping("/register")
     public String mostrarFormularioRegistro() {
-        System.out.println("Mostrando formulario de registro de producto");
         return "producto/initialRegister";
     }
 
