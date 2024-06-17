@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/css/listaProductos.css">
 </head>
 <body>
-<h1>Lista de Productos</h1>
+<h1>Lista de Stock de productos</h1>
 <table>
     <thead>
     <tr>
@@ -17,8 +17,9 @@
         <th>Precio de Venta</th>
         <th>Cantidad</th>
         <th>Cantidad Mínima</th>
-        <th>Acciones</th>
+        <th>Actualizar</th>
         <th>Dar de baja</th>
+        <th>Acciones</th>
     </tr>
     </thead>
     <tbody>
@@ -31,12 +32,17 @@
         <td th:text="${stock.cantExistente}">Cantidad</td>
         <td th:text="${stock.cantMinima}">Cantidad Minima</td>
         <td>
-            <form th:action="@{/producto/baja/{id}(id=${stock.id})}" method="post">
-                <button type="submit">Dar de baja</button>
+            <form th:action="@{/producto/actualizar/{id}(id=${stock.id})}" method="get">
+                <button type="submit">Actualizar</button>
             </form>
         </td>
         <td>
-            <button th:if="${stock.cantExistente} < ${stock.cantMinima}">Alerta de Abastecimiento</button>
+            <form th:action="@{/producto/baja/{id}(id=${stock.id})}" method="post">
+                <button class="alerta" type="submit">Dar de baja</button>
+            </form>
+        </td>
+        <td>
+            <button class="alerta" th:if="${stock.cantExistente} < ${stock.cantMinima}">Alerta de Abastecimiento</button>
         </td>
     </tr>
     </tbody>

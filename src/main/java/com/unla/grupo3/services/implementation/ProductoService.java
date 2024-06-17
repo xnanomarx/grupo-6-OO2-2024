@@ -47,6 +47,7 @@ public class ProductoService {
         productoRepository.save(producto);
     }
 
+
     public List<Producto> traerProductos(){
         return productoRepository.findAll();
     }

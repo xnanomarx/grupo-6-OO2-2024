@@ -20,4 +20,6 @@ public interface IStockRepository extends JpaRepository<Stock, Serializable> {
     @Query("SELECT s FROM Stock s JOIN FETCH s.producto")
     public abstract List<Stock> traerStocksConProducto();
 
+    @Query("SELECT s FROM Stock s JOIN FETCH s.producto where s.id = (:id)")
+    public abstract Stock traerPorId(@Param("id") int id);
 }

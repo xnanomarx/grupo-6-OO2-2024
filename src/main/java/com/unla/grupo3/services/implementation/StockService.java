@@ -46,5 +46,11 @@ public class StockService {
         stockRepository.deleteById(id);
     }
 
+    public void guardarStock(Stock stock){
+        stockRepository.save(stock);
+    }
 
+    public Stock traerPorId(int id) {
+        return stockRepository.traerPorId(id);
+    }
 }

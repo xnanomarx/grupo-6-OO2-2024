@@ -23,5 +23,9 @@ public  class Stock {
     @Column(name = "cantMinima", unique = false, nullable = false)
     private int cantMinima;
 
-
+    public Stock(Producto producto, int cantExistente, int cantMinima) {
+        this.producto = producto;
+        this.cantExistente = cantExistente;
+        this.cantMinima = cantMinima;
+    }
 }
