@@ -38,7 +38,7 @@ public class UserController {
 	public String userHome(Model model) {
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		model.addAttribute("username", user.getUsername());
-		return ViewRouteHelper.INDEX; // Asegúrate de que esta vista exista
+		return ViewRouteHelper.INDEX;
 	}
 
 }
