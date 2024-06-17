@@ -9,14 +9,13 @@ import java.util.Set;
 
 @Entity
 @Getter @Setter @NoArgsConstructor
-public class Almacen extends Stock {
+public class Almacen {
 
-    private int cantidadExistente;
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @OneToMany(mappedBy = "almacen", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Lote> lotes;
-
-    private int cantMinima;
 
 }

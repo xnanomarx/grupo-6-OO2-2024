@@ -31,4 +31,9 @@ public class Lote {
     @ManyToOne
     @JoinColumn(name = "almacen_id", referencedColumnName = "id")
     private Almacen almacen;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_producto", referencedColumnName = "id")
+    private Producto producto;
+
 }

@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Entity
 @Getter @Setter @NoArgsConstructor
 public class Producto {
@@ -28,4 +30,13 @@ public class Producto {
 
     @Column(name = "precioVenta", unique = false, nullable = false)
     private double precioVenta;
+
+    public Producto(String codigo, String nombre, String descripcion, double costo, double precioVenta) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.costo = costo;
+        this.precioVenta = precioVenta;
+    }
+
 }

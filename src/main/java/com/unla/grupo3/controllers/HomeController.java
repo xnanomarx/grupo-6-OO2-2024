@@ -1,5 +1,7 @@
 package com.unla.grupo3.controllers;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,8 +18,8 @@ public class HomeController {
 	@GetMapping("/index")
 	public ModelAndView index() {
 		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDEX);
-		//User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		//modelAndView.addObject("username", user.getUsername());
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		modelAndView.addObject("username", user.getUsername());
 		return modelAndView;
 	}
 
@@ -32,4 +34,10 @@ public class HomeController {
 	public RedirectView redirectToHomeIndex() {
 		return new RedirectView(ViewRouteHelper.ROUTE);
 	}
+
+	@GetMapping("/register")
+	public String testRedirect() {
+		return "redirect:/producto/register";
+	}
+
 }
