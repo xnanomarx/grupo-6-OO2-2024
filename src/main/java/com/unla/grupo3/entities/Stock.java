@@ -7,17 +7,21 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter @NoArgsConstructor
-@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Stock {
+public  class Stock {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected int id;
-
+    private int id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "producto_id", referencedColumnName = "id")
-    protected Producto producto;
+    @JoinColumn(name = "id_producto", referencedColumnName = "id")
+    private Producto producto;
+
+    @Column(name = "cantExistente", unique = false, nullable = false)
+    private int cantExistente;
+
+    @Column(name = "cantMinima", unique = false, nullable = false)
+    private int cantMinima;
 
 
 }
