@@ -38,15 +38,14 @@ public class ProductoService {
         return productoRepository.findByCodigo(codigo) == null;
     }
 
-    public void guardarProducto(String nombre, String descripcion, double costo, double precioVenta) {
+    public Producto guardarProducto(String nombre, String descripcion, double costo, double precioVenta) {
         Producto producto = new Producto();
         producto.setCodigo(generarCodigoUnico());
         producto.setNombre(nombre);
         producto.setDescripcion(descripcion);
         producto.setCosto(costo);
         producto.setPrecioVenta(precioVenta);
-
-        productoRepository.save(producto);
+        return productoRepository.save(producto);
     }
 
 

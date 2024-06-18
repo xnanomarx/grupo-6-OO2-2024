@@ -49,6 +49,14 @@ public class StockService {
         return stockRepository.traerPorId(id);
     }
 
+    public void guardarStock(Producto producto, int cantMinima){
+        Stock stock = new Stock();
+        stock.setProducto(producto);
+        stock.setCantExistente(0);
+        stock.setCantMinima(cantMinima);
+        stockRepository.save(stock);
+    }
+
     @Transactional
     public void actualizarProducto(Stock stock) {
         stockRepository.actualizarStock(stock.getId(), stock.getCantExistente(), stock.getCantMinima());

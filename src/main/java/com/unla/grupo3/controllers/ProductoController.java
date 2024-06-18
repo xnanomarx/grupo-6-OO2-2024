@@ -21,6 +21,9 @@ public class ProductoController {
     @Autowired
     private ProductoService productoService;
 
+    @Autowired
+    private StockService stockService;
+
 
     @GetMapping("/register")
     public String mostrarFormularioRegistro() {
@@ -31,8 +34,13 @@ public class ProductoController {
     public RedirectView guardarProducto(@RequestParam("nombre") String nombre,
                                         @RequestParam("descripcion") String descripcion,
                                         @RequestParam("costo") double costo,
-                                        @RequestParam("precioVenta") double precioVenta) {
-        productoService.guardarProducto(nombre, descripcion, costo, precioVenta);
+                                        @RequestParam("precioVenta") double precioVenta,
+                                        @RequestParam("cantMinima") int cantMinima) {
+
+        Producto producto = productoService.guardarProducto(nombre, descripcion, costo, precioVenta);
+
+        stockService.guardarStock(producto, cantMinima);
+
         return new RedirectView("/producto/register");
     }
     
