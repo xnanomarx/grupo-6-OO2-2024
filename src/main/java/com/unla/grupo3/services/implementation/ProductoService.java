@@ -20,11 +20,6 @@ public class ProductoService {
         this.productoRepository = productoRepository;
     }
 
-    public Producto loadProductoByCodigo(String codigo) {
-        Producto producto = productoRepository.findByCodigo(codigo);
-        return buildProducto(producto);
-    }
-
     private Producto buildProducto(Producto p) {
         return new Producto(generarCodigoUnico(), p.getNombre(), p.getDescripcion(), p.getCosto(), p.getPrecioVenta());
     }
@@ -43,13 +38,21 @@ public class ProductoService {
         return productoRepository.findByCodigo(codigo) == null;
     }
 
-    public void guardarProducto(Producto producto) {
+    public void guardarProducto(String nombre, String descripcion, double costo, double precioVenta) {
+        Producto producto = new Producto();
+        producto.setCodigo(generarCodigoUnico());
+        producto.setNombre(nombre);
+        producto.setDescripcion(descripcion);
+        producto.setCosto(costo);
+        producto.setPrecioVenta(precioVenta);
+
         productoRepository.save(producto);
     }
 
 
-    public List<Producto> traerProductos(){
-        return productoRepository.findAll();
+    public void actualizarProducto(Producto producto){
+        System.out.println(producto.getId());
+        productoRepository.actualizarProducto(producto.getId(), producto.getCodigo(), producto.getNombre(), producto.getDescripcion(), producto.getCosto(), producto.getPrecioVenta());
     }
 
 }

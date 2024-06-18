@@ -1,8 +1,12 @@
 package com.unla.grupo3.services.implementation;
 
+import com.unla.grupo3.entities.Producto;
 import com.unla.grupo3.entities.Stock;
+import com.unla.grupo3.repositories.IProductoRepository;
 import com.unla.grupo3.repositories.IStockRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,16 +17,11 @@ public class StockService {
 
     private com.unla.grupo3.repositories.IStockRepository stockRepository;
 
+    @Autowired
+    private ProductoService productoService;
+
     public StockService(IStockRepository stockRepository) {
         this.stockRepository = stockRepository;
-    }
-
-    public Stock traerPorCodigo(String codigo){
-        return stockRepository.findByCodigoAndFetchProductoEagerly(codigo);
-    }
-
-    public List<Stock> traerStocksConProducto(){
-        return stockRepository.traerStocksConProducto();
     }
 
     public List<Stock> traerStocksOrdenados() {
@@ -46,11 +45,12 @@ public class StockService {
         stockRepository.deleteById(id);
     }
 
-    public void guardarStock(Stock stock){
-        stockRepository.save(stock);
-    }
-
     public Stock traerPorId(int id) {
         return stockRepository.traerPorId(id);
+    }
+
+    @Transactional
+    public void actualizarProducto(Stock stock) {
+        stockRepository.actualizarStock(stock.getId(), stock.getCantExistente(), stock.getCantMinima());
     }
 }
