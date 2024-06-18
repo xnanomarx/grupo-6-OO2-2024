@@ -12,6 +12,6 @@ public interface IUserRepository extends JpaRepository<User, Long> {
 
     User findByUsername(String username);
 
-    @Query(value="select * from baseprueba.user u where u.username = :username", nativeQuery=true)
+    @Query("SELECT u FROM User u LEFT JOIN FETCH u.userRoles WHERE u.username = :username")
     User findByUsernameAndFetchUserRolesEagerly(@Param("username") String username);
 }
