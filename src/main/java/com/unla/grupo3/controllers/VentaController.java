@@ -2,21 +2,23 @@ package com.unla.grupo3.controllers;
 
 
 import com.unla.grupo3.entities.Producto;
+import com.unla.grupo3.entities.Stock;
 import com.unla.grupo3.entities.User;
 import com.unla.grupo3.entities.Venta;
 import com.unla.grupo3.services.implementation.ProductoService;
+import com.unla.grupo3.services.implementation.StockService;
+import com.unla.grupo3.services.implementation.UserService;
 import com.unla.grupo3.services.implementation.VentaService;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -29,13 +31,21 @@ public class VentaController {
     @Autowired
     private ProductoService productoService;
 
+    @Autowired
+    private StockService stockService;
+
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/venta")
     public String mostrarFormularioVenta(Model model){
         //lista de stock en vez de productos
-        List<Producto> listaProductos = productoService.getAllProductos();
-        model.addAttribute("listaHTML", listaProductos);
+        List<Stock> stocks = stockService.getStocks();
+        model.addAttribute("stocks", stocks);
+        System.out.println("le di click a in item de la lista");
         return "venta/venta";
     }
+
 
     @GetMapping("/productos-con-stock")
     public List<Producto> getProductosConStock() {
@@ -47,23 +57,17 @@ public class VentaController {
         return productoService.getAllProductos();
     }
 
-    @PostMapping("/ventaPost")
-    public void registrarVenta(@RequestBody VentaRequest ventaRequest) {
+    @PostMapping("/realizarVenta")
+    public String registrarVenta(@RequestParam("stock") Stock stock,
+                                 @RequestParam("cantidad") int cantidad) {
+        System.out.println("Entró ");
         Venta venta = new Venta();
-        venta.setUser(ventaRequest.getUser());
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userService.findByUsername(userDetails.getUsername());
+        venta.setUser(userService.findByUsername(user.getUsername()));
         venta.setFechaCompra(LocalDate.now());
 
-        Producto producto = ventaRequest.getProducto();
-        int cantidad = ventaRequest.getCantidad();
-
-        ventaService.registrarVenta(venta, producto, cantidad);
+        ventaService.registrarVenta(venta, stock, cantidad);
+        return "venta/confirmacion";
     }
-}
-
-//Clase auxiliar para manejar la entrada de datos desde el cliente.
-@Getter @Setter
-class VentaRequest {
-    private User user;
-    private Producto producto;
-    private int cantidad;
 }

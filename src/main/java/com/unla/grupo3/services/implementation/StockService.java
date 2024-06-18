@@ -7,6 +7,8 @@ import com.unla.grupo3.repositories.IStockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("stockService")
 public class StockService {
 
@@ -16,14 +18,11 @@ public class StockService {
     @Autowired
     private IProductoRepository productoRepository;
 
-    public void actualizarStock(Producto producto, int cantidadVendida){
-        Stock stock = stockRepository.findByProducto(producto);
-
-        if(stock != null){
-            int nuevaCantidad = stock.getCantExistente() - cantidadVendida;
-            stock.setCantExistente(nuevaCantidad);
-            stockRepository.save(stock);
-        }
+    public void actualizarCantidad(int id, int cantidad) {
+        stockRepository.actualizarCantidadStock(id, cantidad);
     }
 
+    public List<Stock> getStocks() {
+        return stockRepository.findAll();
+    }
 }

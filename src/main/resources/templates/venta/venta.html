@@ -1,77 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pantalla de Venta</title>
-    <link rel="stylesheet" href="/css/venta.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pantalla de Venta</title>
+  <link rel="stylesheet" href="/css/venta.css">
 </head>
 <body>
-<div class="container">
-    <h2>Registrar Venta</h2>
-    <form id="ventaForm" method="post" th:action="@{/venta/ventaPost}" th:object="${producto}">
-        <label for="producto">Producto:</label>
-        <select id="producto" name="producto">
-            <!-- Opciones de producto se cargarán dinámicamente -->
-        </select>
+<div class="venta-container">
+  <h1>Venta de Productos</h1>
+  <form action="/venta/realizarVenta" method="post">
+    <label for="stock">Stock:</label>
+    <select id="stock" name="stock">
+      <option value="">Selecciona un producto</option>
+      <th:block th:each="stock : ${stocks}">
+        <option th:value="${stock.id}" th:text="${stock.producto.nombre}"></option>
+      </th:block>
+    </select>
 
-        <label for="cantidad">Cantidad:</label>
-        <input type="number" id="cantidad" name="cantidad" min="1" required>
+    <label for="cantidad">Cantidad:</label>
+    <input type="number" id="cantidad" name="cantidad" min="1" value="1">
 
-        <button type="submit">Registrar Venta</button>
-    </form>
+    <button type="submit">Realizar Venta</button>
+  </form>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Cargar los productos disponibles con stock
-        fetch('/productos-con-stock')
-            .then(response => response.json())
-            .then(data => {
-                const productoSelect = document.getElementById('producto');
-                data.forEach(producto => {
-                    const option = document.createElement('option');
-                    option.value = producto.idProducto;
-                    option.textContent = producto.nombre;
-                    productoSelect.appendChild(option);
-                });
-            });
-
-        // Manejar el envío del formulario
-        document.getElementById('ventaForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            const productoId = document.getElementById('producto').value;
-            const cantidad = document.getElementById('cantidad').value;
-
-            const ventaRequest = {
-                user: {
-                    // Suponiendo que el usuario está autenticado y su información está disponible
-                    idUser: 1 // Cambia esto según sea necesario
-                },
-                fechaCompra: new Date().toISOString().split('T')[0],
-                producto: {
-                    idProducto: productoId
-                },
-                cantidad: cantidad
-            };
-
-            fetch('/ventas', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(ventaRequest)
-            })
-                .then(response => {
-                    if (response.ok) {
-                        alert('Venta registrada con éxito');
-                    } else {
-                        alert('Error al registrar la venta');
-                    }
-                });
-        });
-    });
-</script>
 </body>
 </html>

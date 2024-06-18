@@ -2,6 +2,7 @@ package com.unla.grupo3.services.implementation;
 
 import com.unla.grupo3.entities.Item;
 import com.unla.grupo3.entities.Producto;
+import com.unla.grupo3.entities.Stock;
 import com.unla.grupo3.entities.Venta;
 import com.unla.grupo3.repositories.IItemRepository;
 import com.unla.grupo3.repositories.IVentaRepository;
@@ -20,15 +21,16 @@ public class VentaService {
     @Autowired
     private StockService stockService;
 
-    public void registrarVenta(Venta venta, Producto producto, int cantidad) {
+    public void registrarVenta(Venta venta, Stock stock, int cantidad) {
         //Crear item de la venta y setearle los atributos
         Item item = new Item();
         item.setVenta(venta);
-        item.setProducto(producto);
+        //item.setProducto(stock.getProducto());
         item.setCantidad(cantidad);
+        venta.setItem(item);
 
         //Actualizar stock del producto comprado por el usuario
-        stockService.actualizarStock(producto, cantidad);
+        stockService.actualizarCantidad(stock.getId(), stock.getCantExistente()-cantidad);
 
         //Guardar la venta y el item
         ventaRepository.save(venta);
