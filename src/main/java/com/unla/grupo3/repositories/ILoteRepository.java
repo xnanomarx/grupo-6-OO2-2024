@@ -11,6 +11,4 @@ import java.util.List;
 @Repository("loteRepository")
 public interface ILoteRepository extends JpaRepository<Lote, Serializable> {
 
-    @Query("select l from Lote l")
-    List<Lote> findAllLotes();
 }

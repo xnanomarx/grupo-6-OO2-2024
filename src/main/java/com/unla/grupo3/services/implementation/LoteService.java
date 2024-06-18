@@ -7,27 +7,42 @@ import com.unla.grupo3.repositories.ILoteRepository;
 import com.unla.grupo3.repositories.IProductoRepository;
 import com.unla.grupo3.repositories.IStockRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service("loteService")
 public class LoteService {
 
-    /*private ILoteRepository loteRepository;
-    private IProductoRepository productoRepository;
+    @Autowired
+    private ILoteRepository loteRepository;
+
+    @Autowired
     private IStockRepository stockRepository;
 
-    public LoteService(ILoteRepository loteRepository) {this.loteRepository = loteRepository;}
+    public List<Lote> getAllLotes(){
+        return loteRepository.findAll();
+    }
 
-    @Transactional
-    public Lote registrarLote(Lote lote) {
-        Producto producto = lote.getProducto();
+    public void actualizarStock(int loteId){
+        Lote lote = loteRepository.findById(loteId).orElseThrow(() -> new RuntimeException("Lote no encontrado"));
+        Stock stock = stockRepository.findByProducto(lote.getProducto());
 
-        Stock stock = stockRepository.findByProducto(producto)
-                .orElseThrow(() -> new IllegalArgumentException("Stock no encontrado para el producto"));
+        if (stock == null) {
+            stock = new Stock();
+            stock.setProducto(lote.getProducto());
+            stock.setCantExistente(0);
+            stock.setCantMinima(0);
+        }
 
         stock.setCantExistente(stock.getCantExistente() + lote.getCantidad());
         stockRepository.save(stock);
+    }
 
-        return loteRepository.save(lote);
-    }*/
+    public void borrarLoteActualizado(int loteId){
+        loteRepository.deleteById(loteId);
+    }
+
+
 }
