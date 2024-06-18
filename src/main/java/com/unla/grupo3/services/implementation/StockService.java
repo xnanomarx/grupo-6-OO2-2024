@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("stockService")
@@ -26,7 +27,7 @@ public class StockService {
     public List<Stock> getStocks() {
         return stockRepository.findAll();
     }
-}
+
     private ProductoService productoService;
 
     public StockService(IStockRepository stockRepository) {

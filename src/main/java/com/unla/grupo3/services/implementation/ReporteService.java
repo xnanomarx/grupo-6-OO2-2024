@@ -24,7 +24,7 @@ public class ReporteService {
         return productosConMasStock.isEmpty() ? null : productosConMasStock.get(0);
     }
 
-    public int getTotalVentas(){
+    /*public int getTotalVentas(){
         return productoRepository.contarVentas();
-    }
+    }*/
 }
