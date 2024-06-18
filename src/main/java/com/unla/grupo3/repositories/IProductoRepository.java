@@ -17,4 +17,10 @@ public interface IProductoRepository extends JpaRepository<Producto, Serializabl
 
     @Query("SELECT p FROM Producto p")
     public List<Producto> getAllProductos();
+
+    @Query("SELECT s.producto FROM Stock s ORDER BY s.cantExistente DESC")
+    List<Producto> findProductoConMasStock();
+
+    @Query("SELECT COUNT(v) FROM Venta v")
+    public int contarVentas();
 }

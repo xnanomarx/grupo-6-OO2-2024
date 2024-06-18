@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Reportes de Inventario</title>
+  <link rel="stylesheet" href="/css/reportes.css">
+</head>
+<body>
+<div class="container">
+  <h1>Reportes de Inventario</h1>
+
+  <div class="report-section">
+    <h2>Producto con Más Stock Actualmente</h2>
+    <p th:if="${productoConMasStock != null}" th:text="${productoConMasStock.nombre}"></p>
+    <p th:if="${stockConMasStock != null}">Cantidad de stock: <span th:text="${stockConMasStock.cantExistente}"></span></p>
+    <p th:if="${productoConMasStock == null}">No hay productos en stock</p>
+  </div>
+
+  <div class="report-section">
+    <h2>Total de Ventas Realizadas en el Sistema</h2>
+    <p th:text="${totalVentas}"></p>
+  </div>
+</div>
+</body>
+</html>

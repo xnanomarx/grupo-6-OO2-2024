@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Optional;
 
 @Repository("stockRepository")
@@ -20,5 +21,8 @@ public interface IStockRepository extends JpaRepository<Stock, Serializable> {
     @Transactional
     @Query("UPDATE Stock s SET s.cantExistente = (:cantExistente) WHERE s.id = :id")
     void actualizarCantidadStock(@Param("id") int id, @Param("cantExistente") int cantExistente);
+
+    @Query("SELECT s FROM Stock s ORDER BY s.cantExistente DESC")
+    List<Stock> findProductoConMasStock();
 
 }

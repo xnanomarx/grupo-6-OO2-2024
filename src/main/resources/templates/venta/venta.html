@@ -11,6 +11,7 @@
   <h1>Venta de Productos</h1>
   <form action="/venta/realizarVenta" method="post">
     <label for="stock">Stock:</label>
+
     <select id="stock" name="stock">
       <option value="">Selecciona un producto</option>
       <th:block th:each="stock : ${stocks}">
