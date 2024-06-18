@@ -48,7 +48,7 @@ public class ProductoController {
 
         return new RedirectView("/producto/register");
     }
-
+/*
     @GetMapping("/lista")
     public String mostrarListaProductos(Model model) {
         List<Stock> stocks = stockService.traerStocksOrdenados();
@@ -81,7 +81,7 @@ public class ProductoController {
 
         stockService.guardarStock(nuevoStock);
         return "redirect:/producto/lista";
-    }
+    }*/
     
 
 }
