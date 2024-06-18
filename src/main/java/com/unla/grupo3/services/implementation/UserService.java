@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import jakarta.transaction.Transactional;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -26,7 +25,6 @@ public class UserService implements UserDetailsService {
 		this.userRepository = userRepository;
 	}
 
-	@Transactional
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		com.unla.grupo3.entities.User user = userRepository.findByUsernameAndFetchUserRolesEagerly(username);
@@ -35,8 +33,8 @@ public class UserService implements UserDetailsService {
 
 	private User buildUser(com.unla.grupo3.entities.User user, List<GrantedAuthority> grantedAuthorities) {
 		return new User(user.getUsername(), user.getPassword(), user.isEnabled(),
-						true, true, true, //accountNonExpired, credentialsNonExpired, accountNonLocked,
-						grantedAuthorities);
+				true, true, true, //accountNonExpired, credentialsNonExpired, accountNonLocked,
+				grantedAuthorities);
 	}
 
 	private List<GrantedAuthority> buildGrantedAuthorities(Set<UserRole> userRoles) {
@@ -47,5 +45,8 @@ public class UserService implements UserDetailsService {
 		return new ArrayList<>(grantedAuthorities);
 	}
 
+	public com.unla.grupo3.entities.User findByUsername(String username) {
+		return userRepository.findByUsername(username);
+	}
 
 }
