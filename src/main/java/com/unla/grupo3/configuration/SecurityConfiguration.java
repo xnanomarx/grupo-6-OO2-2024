@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.unla.grupo3.services.implementation.UserService;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -35,6 +36,8 @@ public class SecurityConfiguration {
 				.authorizeHttpRequests(auth -> {
 					auth.requestMatchers("/css/*", "/imgs/*", "/js/*", "/vendor/bootstrap/css/*",
 							"/vendor/jquery/*", "/vendor/bootstrap/js/*", "/api/v1/**").permitAll();
+					auth.requestMatchers("/admin/**").hasRole("ADMIN");
+					auth.requestMatchers("/user/**").hasRole("USER");
 					auth.anyRequest().authenticated();
 				})
 				.formLogin(login -> {
@@ -70,5 +73,6 @@ public class SecurityConfiguration {
 	PasswordEncoder passwordEncoder(){
 		return new BCryptPasswordEncoder();
 	}
+
 }
 

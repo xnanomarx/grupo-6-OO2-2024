@@ -69,4 +69,7 @@ public class ProductoService {
         return productoRepository.findAll();
     }
 
+    public Producto findById(Long id) {
+        return productoRepository.findById(id).orElse(null);
+    }
 }
