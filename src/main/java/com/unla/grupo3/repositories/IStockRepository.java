@@ -22,7 +22,20 @@ public interface IStockRepository extends JpaRepository<Stock, Serializable> {
     @Query("UPDATE Stock s SET s.cantExistente = (:cantExistente) WHERE s.id = :id")
     void actualizarCantidadStock(@Param("id") int id, @Param("cantExistente") int cantExistente);
 
+
     @Query("SELECT s FROM Stock s ORDER BY s.cantExistente DESC")
     List<Stock> findProductoConMasStock();
+
+    @Query("SELECT s FROM Stock s JOIN FETCH s.producto")
+    public abstract List<Stock> traerStocksConProducto();
+
+    @Query("SELECT s FROM Stock s JOIN FETCH s.producto where s.id = (:id)")
+    public abstract Stock traerPorId(@Param("id") int id);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE Stock s SET s.cantExistente = :cantExistente, s.cantMinima = :cantMinima WHERE s.id = :id")
+    void actualizarStock(@Param("id") int id, @Param("cantExistente") int cantExistente, @Param("cantMinima") int cantMinima);
+
 
 }

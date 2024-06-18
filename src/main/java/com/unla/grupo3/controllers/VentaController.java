@@ -42,7 +42,6 @@ public class VentaController {
         //lista de stock en vez de productos
         List<Stock> stocks = stockService.getStocks();
         model.addAttribute("stocks", stocks);
-        System.out.println("le di click a in item de la lista");
         return "venta/venta";
     }
 
@@ -60,7 +59,6 @@ public class VentaController {
     @PostMapping("/realizarVenta")
     public String registrarVenta(@RequestParam("stock") Stock stock,
                                  @RequestParam("cantidad") int cantidad) {
-        System.out.println("Entró ");
         Venta venta = new Venta();
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userService.findByUsername(userDetails.getUsername());

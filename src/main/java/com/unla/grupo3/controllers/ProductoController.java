@@ -34,54 +34,15 @@ public class ProductoController {
     public RedirectView guardarProducto(@RequestParam("nombre") String nombre,
                                         @RequestParam("descripcion") String descripcion,
                                         @RequestParam("costo") double costo,
-                                        @RequestParam("precioVenta") double precioVenta) {
+                                        @RequestParam("precioVenta") double precioVenta,
+                                        @RequestParam("cantMinima") int cantMinima) {
 
-        //creacion del objeto
-        Producto producto = new Producto();
-        producto.setCodigo(productoService.generarCodigoUnico());
-        producto.setNombre(nombre);
-        producto.setDescripcion(descripcion);
-        producto.setCosto(costo);
-        producto.setPrecioVenta(precioVenta);
+        Producto producto = productoService.guardarProducto(nombre, descripcion, costo, precioVenta);
 
-        productoService.guardarProducto(producto);
+        stockService.guardarStock(producto, cantMinima);
 
         return new RedirectView("/producto/register");
     }
-/*
-    @GetMapping("/lista")
-    public String mostrarListaProductos(Model model) {
-        List<Stock> stocks = stockService.traerStocksOrdenados();
-        model.addAttribute("stocks", stocks);
-        return "producto/listaProductos";
-    }
-
-    @PostMapping("/baja/{id}")
-    public RedirectView darDeBajaProducto(@PathVariable("id") int id) {
-        stockService.eliminarStock(id);
-        return new RedirectView("/producto/lista");
-    }
-
-    @GetMapping("/actualizar/{id}")
-    public String mostrarFormularioActualizar(@PathVariable("id") int id, Model model) {
-        Stock stock = stockService.traerPorId(id);
-        String codigo = stock.getProducto().getCodigo();
-        model.addAttribute("stock", stock);
-        model.addAttribute("codigo", codigo);
-        return "producto/actualizarProducto";
-    }
-
-    @PostMapping("/actualizar")
-    public String actualizarProducto(@ModelAttribute("stock") Stock stock) {
-        String codigo = stock.getProducto().getCodigo();
-        stock.getProducto().setCodigo("no");
-        Producto producto = new Producto(codigo, stock.getProducto().getNombre(), stock.getProducto().getDescripcion(), stock.getProducto().getCosto(), stock.getProducto().getPrecioVenta());
-        Stock nuevoStock = new Stock(producto, stock.getCantExistente(), stock.getCantMinima());
-        stockService.eliminarStock(stock.getId());
-
-        stockService.guardarStock(nuevoStock);
-        return "redirect:/producto/lista";
-    }*/
     
 
 }
