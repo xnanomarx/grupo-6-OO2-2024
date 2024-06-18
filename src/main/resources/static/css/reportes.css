@@ -12,6 +12,7 @@ body {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
 h1 {
@@ -21,6 +22,7 @@ h1 {
 
 .report-section {
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .report-section h2 {
@@ -31,4 +33,24 @@ h1 {
     font-size: 1.2em;
     color: #000;
     margin: 10px 0;
+}
+
+.bottom-link {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.link {
+    display: inline-block;
+    margin: 0.5em;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #007bff;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.link:hover {
+    background-color: #0056b3;
 }
