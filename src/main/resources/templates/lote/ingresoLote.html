@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Nuevo Lote</title>
+    <link rel="stylesheet" href="/css/ingresoLote.css">
+</head>
+<body>
+<div class="container">
+    <h1>Registrar Nuevo Lote</h1>
+    <form id="loteForm">
+        <div class="form-group">
+            <label for="producto">Producto:</label>
+            <select id="producto" name="productoId" required>
+                <!-- Opciones de productos se llenarán dinámicamente -->
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="cantidad">Cantidad:</label>
+            <input type="number" id="cantidad" name="cantidad" min="1" required>
+        </div>
+        <div class="form-group">
+            <label for="proveedor">Proveedor:</label>
+            <input type="text" id="proveedor" name="proveedor" required>
+        </div>
+        <button type="submit">Registrar</button>
+    </form>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

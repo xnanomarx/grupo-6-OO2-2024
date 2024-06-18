@@ -7,10 +7,14 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Repository("productoRepository")
 public interface IProductoRepository extends JpaRepository<Producto, Serializable> {
 
     @Query("SELECT p FROM Producto p WHERE p.codigo = (:codigo)")
     public abstract Producto findByCodigo(@Param("codigo") String codigo);
+
+    @Query("SELECT p FROM Producto p")
+    public List<Producto> getAllProductos();
 }
