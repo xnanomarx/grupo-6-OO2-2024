@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter @NoArgsConstructor
@@ -22,6 +26,12 @@ public  class Stock {
 
     @Column(name = "cantMinima", unique = false, nullable = false)
     private int cantMinima;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
     public Stock(Producto producto, int cantExistente, int cantMinima) {
         this.producto = producto;

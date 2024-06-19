@@ -32,19 +32,14 @@
 
 <script>
     function validarAdicion(event) {
-        // Prevenir el comportamiento por defecto del formulario
         event.preventDefault();
 
-        // Verificar si el formulario es válido
         const form = document.getElementById('productForm');
         if (form.checkValidity()) {
-            // Mostrar mensaje de éxito
             alert('Producto agregado con éxito');
 
-            // Enviar el formulario
             form.submit();
         } else {
-            // Mostrar los mensajes de error del formulario
             form.reportValidity();
         }
     }

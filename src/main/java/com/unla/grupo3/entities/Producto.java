@@ -5,7 +5,10 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -30,6 +33,12 @@ public class Producto {
 
     @Column(name = "precioVenta", unique = false, nullable = false)
     private double precioVenta;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
     public Producto(String codigo, String nombre, String descripcion, double costo, double precioVenta) {
         this.codigo = codigo;
