@@ -25,7 +25,6 @@ public class VentaService {
         //Crear item de la venta y setearle los atributos
         Item item = new Item();
         item.setVenta(venta);
-        //item.setProducto(stock.getProducto());
         item.setCantidad(cantidad);
         venta.setItem(item);
 

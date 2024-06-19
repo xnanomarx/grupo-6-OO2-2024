@@ -63,4 +63,10 @@ public class ProductoService {
         productoRepository.actualizarProducto(producto.getId(), producto.getCodigo(), producto.getNombre(), producto.getDescripcion(), producto.getCosto(), producto.getPrecioVenta());
     }
 
+
+
+    public int contarVentas(){
+        return productoRepository.contarVentas();
+    }
+
 }

@@ -21,13 +21,17 @@ public class LoteService {
     @Autowired
     private IStockRepository stockRepository;
 
+    @Autowired
+    private StockService stockService;
+
     public List<Lote> getAllLotes(){
         return loteRepository.findAll();
     }
 
     public void actualizarStock(int loteId){
         Lote lote = loteRepository.findById(loteId).orElseThrow(() -> new RuntimeException("Lote no encontrado"));
-        Stock stock = stockRepository.findByProducto(lote.getProducto());
+        //Stock stock = stockRepository.findByProducto(lote.getProducto());
+        Stock stock = stockService.findByProducto(lote.getProducto());
 
         if (stock == null) {
             stock = new Stock();
