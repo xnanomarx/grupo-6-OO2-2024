@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lote</title>
+    <link rel="stylesheet" href="/css/lotes.css">
+</head>
+<body>
+<div class="centered">
+    <h1>Lista de Lotes</h1>
+</div>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Cantidad</th>
+        <th>Fecha de Recepción</th>
+        <th>Proveedor</th>
+        <th>Precio de Compra</th>
+        <th>Producto</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="lote : ${lotes}">
+        <td th:text="${lote.id}"></td>
+        <td th:text="${lote.cantidad}"></td>
+        <td th:text="${lote.fechaRecepcion}"></td>
+        <td th:text="${lote.proveedor}"></td>
+        <td th:text="${lote.precioCompra}"></td>
+        <td th:text="${lote.producto.nombre}"></td>
+        <td>
+            <form th:action="@{/lotes/actualizar-stock}" method="post">
+                <input type="hidden" th:name="loteId" th:value="${lote.id}" />
+                <button type="submit">Actualizar Stock</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div class="bottom-link">
+    <a href="/index" class="link">Volver</a>
+</div>
+</body>
+</html>

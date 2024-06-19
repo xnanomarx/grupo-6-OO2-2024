@@ -5,8 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import com.unla.grupo3.entities.Almacen;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter @NoArgsConstructor
@@ -35,5 +38,11 @@ public class Lote {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_producto", referencedColumnName = "id")
     private Producto producto;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
 }

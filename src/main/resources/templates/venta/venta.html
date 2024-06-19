@@ -9,9 +9,9 @@
 <body>
 <div class="venta-container">
   <h1>Venta de Productos</h1>
-  <form action="/venta/realizarVenta" method="post">
-    <label for="stock">Stock:</label>
 
+  <form action="/venta/realizarVenta" method="post" onsubmit="return validarSeleccion()">
+    <label for="stock">Stock:</label>
     <select id="stock" name="stock">
       <option value="">Selecciona un producto</option>
       <th:block th:each="stock : ${stocks}">
@@ -24,6 +24,20 @@
 
     <button type="submit">Realizar Venta</button>
   </form>
+  <div class="bottom-link">
+    <a href="/index" class="link">Volver</a>  </div>
 </div>
+
+<script>
+  function validarSeleccion() {
+    const select = document.getElementById('stock');
+    if (select.value === "") {
+      alert("Por favor, selecciona un item válido.");
+      return false; // Prevenir que el formulario se envíe
+    }
+    return true; // Permitir que el formulario se envíe
+  }
+</script>
+
 </body>
 </html>

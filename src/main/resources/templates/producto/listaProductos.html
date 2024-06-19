@@ -37,7 +37,7 @@
             </form>
         </td>
         <td>
-            <form th:action="@{/stock/baja/{id}(id=${stock.id})}" method="post">
+            <form th:action="@{/stock/baja/{id}(id=${stock.id})}" method="post" onsubmit="confirmarBaja(event)">
                 <button class="alerta" type="submit">Dar de baja</button>
             </form>
         </td>
@@ -50,5 +50,14 @@
     </tbody>
 </table>
 <a href="/index" class="volver">Volver</a>
+
+<script>
+    function confirmarBaja(event) {
+        if (!confirm("¿Estás seguro que quieres dar de baja?")) {
+            event.preventDefault();
+        }
+    }
+</script>
+
 </body>
 </html>

@@ -8,6 +8,7 @@ body {
     align-items: center;
     height: 100vh;
 }
+
 .venta-container {
     background-color: #fff;
     padding: 20px;
@@ -15,16 +16,19 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 300px;
 }
+
 .venta-container h1 {
     margin-top: 0;
     font-size: 24px;
     text-align: center;
 }
+
 .venta-container label {
     display: block;
     margin-top: 10px;
     font-size: 14px;
 }
+
 .venta-container select,
 .venta-container input {
     width: 100%;
@@ -33,6 +37,7 @@ body {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+
 .venta-container button {
     width: 100%;
     padding: 10px;
@@ -44,6 +49,55 @@ body {
     font-size: 16px;
     cursor: pointer;
 }
+
 .venta-container button:hover {
     background-color: #218838;
+}
+
+.venta-container {
+    text-align: center;
+    padding: 20px;
+}
+
+.venta-container form {
+    margin: 20px auto;
+    max-width: 400px;
+    text-align: left;
+}
+
+.venta-container label,
+.venta-container select,
+.venta-container input,
+.venta-container button {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.bottom-link {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.link {
+    display: inline-block;
+    margin: 0.5em;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #007bff;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+}
+
+.link:hover {
+    background-color: #0056b3;
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
 }
