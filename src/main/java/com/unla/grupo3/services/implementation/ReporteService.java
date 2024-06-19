@@ -25,10 +25,6 @@ public class ReporteService {
     }
 
     public int getTotalVentas(){
-<<<<<<< Updated upstream
-        return productoRepository.contarVentas();
-=======
         return productoService.contarVentas();
->>>>>>> Stashed changes
     }
 }

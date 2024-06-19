@@ -4,6 +4,7 @@ import com.unla.grupo3.entities.Producto;
 import com.unla.grupo3.entities.Stock;
 import com.unla.grupo3.repositories.IProductoRepository;
 import com.unla.grupo3.repositories.IStockRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,9 +26,6 @@ public class StockService {
     public List<Stock> getStocks() {
         return stockRepository.findAll();
     }
-<<<<<<< Updated upstream
-}
-=======
 
     private ProductoService productoService;
 
@@ -35,7 +33,7 @@ public class StockService {
         this.stockRepository = stockRepository;
     }
 
-    public List<Stock> traerStocksOrdenados() {
+   /* public List<Stock> traerStocksOrdenados() {
         List<Stock> stocks = stockRepository.traerStocksConProducto();
         List<Stock> lowStock = new ArrayList<>();
         List<Stock> normalStock = new ArrayList<>();
@@ -66,15 +64,18 @@ public class StockService {
         stock.setCantExistente(0);
         stock.setCantMinima(cantMinima);
         stockRepository.save(stock);
-    }
+    }*/
 
-    @Transactional
+   /* @Transactional
     public void actualizarProducto(Stock stock) {
         stockRepository.actualizarStock(stock.getId(), stock.getCantExistente(), stock.getCantMinima());
-    }
+    }*/
 
     public List<Stock> encontrarProductoConMasStock(){
         return stockRepository.findProductoConMasStock();
     }
+
+    public Stock findByProducto(Producto producto){
+        return stockRepository.findByProducto(producto);
+    }
 }
->>>>>>> Stashed changes

@@ -63,18 +63,15 @@ public class ProductoService {
     public void guardarProducto(Producto producto) {
         productoRepository.save(producto);
     }
-<<<<<<< Updated upstream
-=======
 
 
-    public void actualizarProducto(Producto producto){
+    /*public void actualizarProducto(Producto producto){
         System.out.println(producto.getId());
         productoRepository.actualizarProducto(producto.getId(), producto.getCodigo(), producto.getNombre(), producto.getDescripcion(), producto.getCosto(), producto.getPrecioVenta());
-    }
+    }*/
 
     public int contarVentas(){
         return productoRepository.contarVentas();
     }
 
->>>>>>> Stashed changes
 }

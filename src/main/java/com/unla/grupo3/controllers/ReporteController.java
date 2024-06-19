@@ -21,10 +21,7 @@ public class ReporteController {
         Stock stockConMasStock = reporteService.getProductoConMasStock();
         model.addAttribute("stockConMasStock", stockConMasStock);
         model.addAttribute("productoConMasStock", stockConMasStock != null ? stockConMasStock.getProducto() : null);
-<<<<<<< Updated upstream
         //model.addAttribute("productoConMasStock", reporteService.getProductoConMasStock());
-=======
->>>>>>> Stashed changes
         model.addAttribute("totalVentas", reporteService.getTotalVentas());
 
         return "reportes/reportes";

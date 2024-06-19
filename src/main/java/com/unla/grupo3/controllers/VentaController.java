@@ -39,7 +39,6 @@ public class VentaController {
 
     @GetMapping("/venta")
     public String mostrarFormularioVenta(Model model){
-        //lista de stock en vez de productos
         List<Stock> stocks = stockService.getStocks();
         model.addAttribute("stocks", stocks);
         return "venta/venta";
