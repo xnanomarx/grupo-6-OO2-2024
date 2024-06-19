@@ -17,8 +17,6 @@ public interface IProductoRepository extends JpaRepository<Producto, Serializabl
     @Query("SELECT p FROM Producto p WHERE p.codigo = (:codigo)")
     public abstract Producto findByCodigo(@Param("codigo") String codigo);
 
-    @Query("SELECT COUNT(v) FROM Venta v")
-    public abstract int contarVentas();
     @Query("SELECT p FROM Producto p WHERE p.id = (:id)")
     public abstract Producto findById(@Param("id") int id);
 

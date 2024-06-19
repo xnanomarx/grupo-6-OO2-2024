@@ -8,6 +8,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("stockService")
@@ -44,4 +45,43 @@ public class StockService {
     public Stock guardarStock(Stock stock){
         return stockRepository.save(stock);
     }
+
+    public List<Stock> traerStocksOrdenados() {
+        List<Stock> stocks = stockRepository.traerStocksConProducto();
+        List<Stock> lowStock = new ArrayList<>();
+        List<Stock> normalStock = new ArrayList<>();
+
+        for (Stock stock : stocks) {
+            if (stock.getCantExistente() < stock.getCantMinima()) {
+                lowStock.add(stock);
+            } else {
+                normalStock.add(stock);
+            }
+        }
+
+        lowStock.addAll(normalStock);
+        return lowStock;
+    }
+
+    public void eliminarStock(int id) {
+        stockRepository.deleteById(id);
+    }
+
+    public Stock traerPorId(int id) {
+        return stockRepository.traerPorId(id);
+    }
+
+    public void guardarStock(Producto producto, int cantMinima){
+        Stock stock = new Stock();
+        stock.setProducto(producto);
+        stock.setCantExistente(0);
+        stock.setCantMinima(cantMinima);
+        stockRepository.save(stock);
+    }
+
+    @Transactional
+    public void actualizarProducto(Stock stock) {
+        stockRepository.actualizarStock(stock.getId(), stock.getCantExistente(), stock.getCantMinima());
+    }
+
 }

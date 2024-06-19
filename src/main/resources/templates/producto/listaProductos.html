@@ -45,7 +45,7 @@
         <div class="bottom-link">
             <form th:action="@{/pedido}" method="get" th:if="${stock.cantExistente} &lt; ${stock.cantMinima}">
                 <input type="hidden" name="productId" th:value="${stock.producto.id}">
-                <button type="submit" class="link-button">Alerta de abastecimiento</button>
+                <button type="submit" class="link-button">Pedido de abastecimiento</button>
             </form>
         </div>
     </td>
