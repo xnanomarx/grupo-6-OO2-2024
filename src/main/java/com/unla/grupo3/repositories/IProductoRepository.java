@@ -27,10 +27,6 @@ public interface IProductoRepository extends JpaRepository<Producto, Serializabl
     void actualizarProducto(@Param("id") int id, @Param("codigo") String codigo, @Param("nombre") String nombre, @Param("descripcion") String descripcion, @Param("costo") double costo, @Param("precioVenta") double precioVenta);
 
     @Query("SELECT COUNT(v) FROM Venta v")
-<<<<<<< Updated upstream
-    public int contarVentas();
-=======
     public abstract int contarVentas();
-
->>>>>>> Stashed changes
+    
 }
