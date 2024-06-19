@@ -12,10 +12,10 @@
 
   <form action="/venta/realizarVenta" method="post" onsubmit="return validarSeleccion()">
     <label for="stock">Stock:</label>
-    <select id="stock" name="stock">
+    <select id="stock" name="stock" onchange="actualizarCantidadExistente()">
       <option value="">Selecciona un producto</option>
       <th:block th:each="stock : ${stocks}">
-        <option th:value="${stock.id}" th:text="${stock.producto.nombre}"></option>
+        <option th:value="${stock.id}" th:data-cantidad="${stock.cantExistente}" th:text="${stock.producto.nombre}"></option>
       </th:block>
     </select>
 
@@ -27,16 +27,39 @@
   <div class="bottom-link">
     <a href="/index" class="link">Volver</a>  </div>
 </div>
+</div>
 
 <script>
   function validarSeleccion() {
     const select = document.getElementById('stock');
+    const cantidadInput = document.getElementById('cantidad');
+    const cantidadExistente = select.options[select.selectedIndex].getAttribute('data-cantidad');
+
     if (select.value === "") {
       alert("Por favor, selecciona un item válido.");
-      return false; // Prevenir que el formulario se envíe
+      return false;
     }
-    return true; // Permitir que el formulario se envíe
+
+    if(parseInt(cantidadInput.value) > parseInt(cantidadExistente)){
+      alert("La cantidad solicitada supera la cantidad existente en el stock");
+      return false;
+    }
+    return true;
   }
+
+  function actualizarCantidadExistente(){
+    const select = document.getElementById('stock');
+    const cantidadExistente = select.options[select.selectedIndex].getAttribute('data-cantidad');
+    const cantidadExistenteDisplay = document.getElementById('cantidad-existente');
+
+    if (cantidadExistente) {
+      cantidadExistenteDisplay.textContent = `Cantidad existente: ${cantidadExistente}`;
+    } else {
+      cantidadExistenteDisplay.textContent = "";
+    }
+
+  }
+
 </script>
 
 </body>

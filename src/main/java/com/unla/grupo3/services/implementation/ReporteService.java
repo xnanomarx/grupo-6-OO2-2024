@@ -13,18 +13,22 @@ import java.util.List;
 public class ReporteService {
 
     @Autowired
-    private IProductoRepository productoRepository;
+    private ProductoService productoService;
 
     @Autowired
-    private IStockRepository stockRepository;
+    private StockService stockService;
 
     public Stock getProductoConMasStock(){
         //List<Producto> productosConMasStock = productoRepository.findProductoConMasStock();
-        List<Stock> productosConMasStock = stockRepository.findProductoConMasStock();
+        List<Stock> productosConMasStock = stockService.encontrarProductoConMasStock();
         return productosConMasStock.isEmpty() ? null : productosConMasStock.get(0);
     }
 
     public int getTotalVentas(){
+<<<<<<< Updated upstream
         return productoRepository.contarVentas();
+=======
+        return productoService.contarVentas();
+>>>>>>> Stashed changes
     }
 }

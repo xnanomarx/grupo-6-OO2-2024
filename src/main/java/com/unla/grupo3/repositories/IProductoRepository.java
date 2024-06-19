@@ -22,5 +22,10 @@ public interface IProductoRepository extends JpaRepository<Producto, Serializabl
     List<Producto> findProductoConMasStock();
 
     @Query("SELECT COUNT(v) FROM Venta v")
+<<<<<<< Updated upstream
     public int contarVentas();
+=======
+    int contarVentas();
+
+>>>>>>> Stashed changes
 }

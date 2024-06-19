@@ -22,10 +22,12 @@ public class VentaService {
     private StockService stockService;
 
     public void registrarVenta(Venta venta, Stock stock, int cantidad) {
+        //Validacion
+
+
         //Crear item de la venta y setearle los atributos
         Item item = new Item();
         item.setVenta(venta);
-        //item.setProducto(stock.getProducto());
         item.setCantidad(cantidad);
         venta.setItem(item);
 
