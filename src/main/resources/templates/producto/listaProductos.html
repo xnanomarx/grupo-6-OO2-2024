@@ -42,7 +42,9 @@
             </form>
         </td>
         <td>
-            <button class="alerta" th:if="${stock.cantExistente} < ${stock.cantMinima}">Alerta de Abastecimiento</button>
+            <form  th:action="@{/stock/baja/{id}(id=${stock.id})}" method="post">
+                <button class="alerta" th:if="${stock.cantExistente} < ${stock.cantMinima}" type="submit" >Alerta de Abastecimiento</button>
+            </form>
         </td>
     </tr>
     </tbody>

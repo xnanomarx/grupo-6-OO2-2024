@@ -41,9 +41,15 @@ public class UserController {
 		return ViewRouteHelper.INDEX;
 	}
 
-	@GetMapping("/register")
+	/*@GetMapping("/register")
 	public String showRegistrationForm(Model model) {
 		return "register";
+	}*/
+
+	@GetMapping("/user/register")
+	public String showRegistrationForm(Model model) {
+		//model.addAttribute("cliente", new Cliente());
+		return "user/register"; // Asegúrate de que el nombre de la plantilla es correcto
 	}
 
 }

@@ -15,7 +15,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.unla.grupo3.services.implementation.UserService;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -29,15 +28,13 @@ public class SecurityConfiguration {
 	}
 
 	@Bean
-	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		return http
 				.csrf(AbstractHttpConfigurer::disable)
 				.cors(AbstractHttpConfigurer::disable)
 				.authorizeHttpRequests(auth -> {
-					auth.requestMatchers("/css/*", "/imgs/*", "/js/*", "/vendor/bootstrap/css/*",
-							"/vendor/jquery/*", "/vendor/bootstrap/js/*", "/api/v1/**").permitAll();
-					auth.requestMatchers("/admin/**").hasRole("ADMIN");
-					auth.requestMatchers("/user/**").hasRole("USER");
+					auth.requestMatchers("/css/**", "/css/*", "/resources/**", "/imgs/", "/js/", "/vendor/bootstrap/css/*",
+							"/vendor/jquery/*", "/vendor/bootstrap/js/", "/api/v1/**", "/user/register", "/register").permitAll();
 					auth.anyRequest().authenticated();
 				})
 				.formLogin(login -> {
@@ -62,7 +59,7 @@ public class SecurityConfiguration {
 	}
 
 	@Bean
-	AuthenticationProvider authenticationProvider(){
+	AuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
 		provider.setPasswordEncoder(passwordEncoder());
 		provider.setUserDetailsService(userService);
@@ -70,9 +67,7 @@ public class SecurityConfiguration {
 	}
 
 	@Bean
-	PasswordEncoder passwordEncoder(){
+	PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-
 }
-

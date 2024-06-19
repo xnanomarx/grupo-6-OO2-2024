@@ -32,7 +32,8 @@ public class UserRole {
 	@JoinColumn(name="user_id", nullable=false)
 	private User user;
 
-	@Column(name="role", nullable=false, length=100)
+	@Getter
+    @Column(name="role", nullable=false, length=100)
 	private String role;
 
 	@CreationTimestamp
@@ -46,4 +47,5 @@ public class UserRole {
 		this.user = user;
 		this.role = role;
 	}
+
 }
