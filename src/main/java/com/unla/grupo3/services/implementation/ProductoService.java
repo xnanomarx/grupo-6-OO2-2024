@@ -4,23 +4,23 @@ import com.unla.grupo3.entities.Producto;
 import com.unla.grupo3.entities.Stock;
 import com.unla.grupo3.repositories.IProductoRepository;
 import com.unla.grupo3.repositories.IStockRepository;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service("productoService")
 public class ProductoService {
 
+    @Autowired
     private IProductoRepository productoRepository;
+    @Autowired
     private IStockRepository stockRepository;
 
-    public ProductoService(IProductoRepository productoRepository) {
+    public ProductoService() {
         this.productoRepository = productoRepository;
     }
 
@@ -63,7 +63,9 @@ public class ProductoService {
         productoRepository.actualizarProducto(producto.getId(), producto.getCodigo(), producto.getNombre(), producto.getDescripcion(), producto.getCosto(), producto.getPrecioVenta());
     }
 
-
+    public Producto encontrarPorId(int id){
+        return productoRepository.findById(id);
+    }
 
     public int contarVentas(){
         return productoRepository.contarVentas();

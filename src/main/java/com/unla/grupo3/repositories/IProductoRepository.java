@@ -17,10 +17,15 @@ public interface IProductoRepository extends JpaRepository<Producto, Serializabl
     @Query("SELECT p FROM Producto p WHERE p.codigo = (:codigo)")
     public abstract Producto findByCodigo(@Param("codigo") String codigo);
 
+    @Query("SELECT p FROM Producto p WHERE p.id = (:id)")
+    public abstract Producto findById(@Param("id") int id);
+
+
     @Modifying
     @Transactional
     @Query("UPDATE Producto p SET p.codigo = :codigo, p.nombre = :nombre, p.descripcion = :descripcion, p.costo = :costo, p.precioVenta = :precioVenta WHERE p.id = :id")
     void actualizarProducto(@Param("id") int id, @Param("codigo") String codigo, @Param("nombre") String nombre, @Param("descripcion") String descripcion, @Param("costo") double costo, @Param("precioVenta") double precioVenta);
 
-
+    @Query("SELECT COUNT(v) FROM Venta v")
+    public int contarVentas();
 }
