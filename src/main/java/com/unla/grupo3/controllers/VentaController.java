@@ -34,9 +34,6 @@ public class VentaController {
     @Autowired
     private StockService stockService;
 
-    @Autowired
-    private UserService userService;
-
     @GetMapping("/venta")
     public String mostrarFormularioVenta(Model model){
         List<Stock> stocks = stockService.getStocks();
