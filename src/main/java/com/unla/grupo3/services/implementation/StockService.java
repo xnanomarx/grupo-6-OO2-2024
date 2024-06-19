@@ -18,20 +18,18 @@ public class StockService {
     private IStockRepository stockRepository;
 
     @Autowired
+    private ProductoService productoService;
+
+    @Autowired
     private IProductoRepository productoRepository;
+
+    public StockService(IStockRepository stockRepository) {this.stockRepository = stockRepository;}
 
     public void actualizarCantidad(int id, int cantidad) {
         stockRepository.actualizarCantidadStock(id, cantidad);
     }
-
     public List<Stock> getStocks() {
         return stockRepository.findAll();
-    }
-
-    private ProductoService productoService;
-
-    public StockService(IStockRepository stockRepository) {
-        this.stockRepository = stockRepository;
     }
 
     public List<Stock> traerStocksOrdenados() {
