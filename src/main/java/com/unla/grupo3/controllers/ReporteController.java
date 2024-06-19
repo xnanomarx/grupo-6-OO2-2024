@@ -21,7 +21,7 @@ public class ReporteController {
         Stock stockConMasStock = reporteService.getProductoConMasStock();
         model.addAttribute("stockConMasStock", stockConMasStock);
         model.addAttribute("productoConMasStock", stockConMasStock != null ? stockConMasStock.getProducto() : null);
-        //model.addAttribute("totalVentas", reporteService.getTotalVentas());
+        model.addAttribute("totalVentas", reporteService.getTotalVentas());
 
         return "reportes/reportes";
     }
