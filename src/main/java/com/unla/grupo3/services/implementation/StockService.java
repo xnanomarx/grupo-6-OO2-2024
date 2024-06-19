@@ -40,4 +40,8 @@ public class StockService {
     public Stock findByProducto(Producto producto){
         return stockRepository.findByProducto(producto);
     }
+
+    public Stock guardarStock(Stock stock){
+        return stockRepository.save(stock);
+    }
 }

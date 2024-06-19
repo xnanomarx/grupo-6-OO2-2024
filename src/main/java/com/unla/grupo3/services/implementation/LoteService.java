@@ -30,7 +30,6 @@ public class LoteService {
 
     public void actualizarStock(int loteId){
         Lote lote = loteRepository.findById(loteId).orElseThrow(() -> new RuntimeException("Lote no encontrado"));
-        //Stock stock = stockRepository.findByProducto(lote.getProducto());
         Stock stock = stockService.findByProducto(lote.getProducto());
 
         if (stock == null) {
@@ -41,7 +40,7 @@ public class LoteService {
         }
 
         stock.setCantExistente(stock.getCantExistente() + lote.getCantidad());
-        stockRepository.save(stock);
+        stockService.guardarStock(stock);
     }
 
     public void borrarLoteActualizado(int loteId){
