@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.unla.grupo3.repositories.IUserRoleRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -21,8 +22,11 @@ public class UserService implements UserDetailsService {
 
 	private IUserRepository userRepository;
 
-	public UserService(IUserRepository userRepository) {
+	private IUserRoleRepository userRoleRepository;
+
+	public UserService(IUserRepository userRepository, IUserRoleRepository userRoleRepository) {
 		this.userRepository = userRepository;
+		this.userRoleRepository = userRoleRepository;
 	}
 
 	@Override
@@ -46,7 +50,16 @@ public class UserService implements UserDetailsService {
 	}
 
 	public com.unla.grupo3.entities.User findByUsername(String username) {
-		return userRepository.findByUsername(username);
+		return userRepository.findByUsernameAndFetchUserRolesEagerly(username);
 	}
+
+	public void guardarUser(com.unla.grupo3.entities.User user) {
+		userRepository.save(user);
+	}
+
+	public void guardarUserRoles(UserRole role) {
+		userRoleRepository.save(role);
+	}
+
 
 }

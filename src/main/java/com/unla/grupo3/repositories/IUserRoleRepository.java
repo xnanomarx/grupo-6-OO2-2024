@@ -8,4 +8,5 @@ import java.io.Serializable;
 
 @Repository("userRoleRepository")
 public interface IUserRoleRepository extends JpaRepository<UserRole, Serializable> {
+
 }

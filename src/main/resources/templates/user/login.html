@@ -20,6 +20,9 @@
 	      	<div th:if="${error != null}" class="alert alert-danger">
 		    	Invalid username or password.
 		    </div>
+			  <form th:action="@{/formregister}" method="get">
+				  <button type="submit" class="btn btn-secondary">Registrar usuario</button>
+			  </form>
 	      </div>
 	    </div>
 	    <!-- Bootstrap core JavaScript -->
