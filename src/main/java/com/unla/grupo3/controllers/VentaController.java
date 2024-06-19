@@ -34,9 +34,6 @@ public class VentaController {
     @Autowired
     private StockService stockService;
 
-    @Autowired
-    private UserService userService;
-
     @GetMapping("/venta")
     public String mostrarFormularioVenta(Model model){
         List<Stock> stocks = stockService.getStocks();
@@ -59,10 +56,6 @@ public class VentaController {
     public String registrarVenta(@RequestParam("stock") Stock stock,
                                  @RequestParam("cantidad") int cantidad) {
         Venta venta = new Venta();
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userService.findByUsername(userDetails.getUsername());
-        venta.setUser(userService.findByUsername(user.getUsername()));
-        venta.setFechaCompra(LocalDate.now());
 
         ventaService.registrarVenta(venta, stock, cantidad);
         return "venta/confirmacion";
