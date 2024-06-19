@@ -31,7 +31,7 @@ public class ProductoController {
     }
 
     @PostMapping("/guardar")
-    public RedirectView guardarProducto(@RequestParam("nombre") String nombre,
+    public RedirectView guardarProductoStock(@RequestParam("nombre") String nombre,
                                         @RequestParam("descripcion") String descripcion,
                                         @RequestParam("costo") double costo,
                                         @RequestParam("precioVenta") double precioVenta,

@@ -24,19 +24,6 @@ public class ProductoService {
         this.productoRepository = productoRepository;
     }
 
-    private Producto buildProducto(Producto p) {
-        return new Producto(generarCodigoUnico(), p.getNombre(), p.getDescripcion(), p.getCosto(), p.getPrecioVenta());
-    }
-
-    public String generarCodigoUnico() {
-        String nuevoCodigo;
-        do {
-            nuevoCodigo = "PROD-" + UUID.randomUUID().toString().substring(0, 8);
-        } while (!esCodigoUnico(nuevoCodigo));
-
-        return nuevoCodigo;
-    }
-
     public List<Producto> getAllProductos() {
         return productoRepository.findAll();
     }
@@ -50,10 +37,15 @@ public class ProductoService {
 
     }
 
-    private boolean esCodigoUnico(String codigo) {
+    public String generarCodigoUnico() {
+        String nuevoCodigo;
+        do {
+            nuevoCodigo = "PROD-" + UUID.randomUUID().toString().substring(0, 8);
+        } while (!esCodigoUnico(nuevoCodigo));
 
-        return productoRepository.findByCodigo(codigo) == null;
+        return nuevoCodigo;
     }
+    private boolean esCodigoUnico(String codigo) {return productoRepository.findByCodigo(codigo) == null;}
 
     public Producto guardarProducto(String nombre, String descripcion, double costo, double precioVenta) {
         Producto producto = new Producto();
@@ -69,6 +61,12 @@ public class ProductoService {
     public void actualizarProducto(Producto producto){
         System.out.println(producto.getId());
         productoRepository.actualizarProducto(producto.getId(), producto.getCodigo(), producto.getNombre(), producto.getDescripcion(), producto.getCosto(), producto.getPrecioVenta());
+    }
+
+
+
+    public int contarVentas(){
+        return productoRepository.contarVentas();
     }
 
 }
