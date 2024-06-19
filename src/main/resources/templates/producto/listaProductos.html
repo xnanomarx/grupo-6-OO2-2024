@@ -43,7 +43,7 @@
         </td>
         <td>
             <div class="bottom-link">
-                <a href="#" class="link" th:if="${stock.cantExistente} &lt; ${stock.cantMinima}" onclick="redirectToPedido()">Alerta de abastecimiento</a>
+                <a href="#" class="link" th:if="${stock.cantExistente} &lt; ${stock.cantMinima}" th:href="@{/pedido(productId=${stock.producto.idProducto})}">Alerta de abastecimiento</a>
             </div>
         </td>
     </tr>

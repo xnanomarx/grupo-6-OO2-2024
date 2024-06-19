@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Realizar Pedido</title>
+    <link rel="stylesheet" href="/css/pedido.css">
 </head>
 <body>
+<div class="pedido-container">
+    <h1>Realizar Pedido</h1>
+    <form action="/pedido/realizar" method="post" onsubmit="return validarPedido()">
+        <input type="hidden" name="productId" th:value="${productId}">
+
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+
+        <label for="cantidad">Cantidad:</label>
+        <input type="number" id="cantidad" name="cantidad" min="1" value="1" required>
+
+        <label for="proveedor">Proveedor:</label>
+        <input type="text" id="proveedor" name="proveedor" required>
+
+        <button type="submit">Realizar Pedido</button>
+    </form>
+</div>
+
+<script>
+    function validarPedido() {
+        // Validar cualquier lógica adicional aquí si es necesario
+        return true; // Permitir que el formulario se envíe
+    }
+</script>
 
 </body>
 </html>
