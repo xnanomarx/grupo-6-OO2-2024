@@ -5,15 +5,22 @@
     <title>Registrarse</title>
     <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/css/modern-business.css" rel="stylesheet" />
+    <style>
+        .error-message {
+            color: red;
+            display: none;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
     <div class="jumbotron">
         <h1 class="display-5">Registrarse</h1>
-        <form th:action="@{guardarregister}" method="post" th:object="${user}">
+        <form th:action="@{guardarregister}" method="post" th:object="${user}" onsubmit="return validarContraseñas()">
             <input type="text" name="username" id="username" placeholder="Username" required />
             <input type="password" name="password" id="password" placeholder="Password" required />
             <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" required />
+            <span id="error-message" class="error-message">Las contraseñas no coinciden.</span>
             <input type="submit" value="Register" />
         </form>
         <div th:if="${error != null}" class="alert alert-danger">
@@ -23,5 +30,20 @@
 </div>
 <script src="/vendor/jquery/jquery.min.js"></script>
 <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script>
+    function validarContraseñas() {
+        var password = document.getElementById('password').value;
+        var confirmPassword = document.getElementById('confirmPassword').value;
+        var errorMessage = document.getElementById('error-message');
+
+        if (password !== confirmPassword) {
+            errorMessage.style.display = 'block';
+            return false;
+        } else {
+            errorMessage.style.display = 'none';
+            return true;
+        }
+    }
+</script>
 </body>
 </html>
