@@ -1,6 +1,7 @@
 package com.unla.grupo3.controllers;
 
 import com.unla.grupo3.services.implementation.LoteService;
+import com.unla.grupo3.services.implementation.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,8 @@ public class LoteController {
 
     @Autowired
     private LoteService loteService;
+    @Autowired
+    private PedidoService pedidoService;
 
     @GetMapping("/lotes")
     public String verLotes(Model model){
@@ -33,4 +36,6 @@ public class LoteController {
         loteService.borrarLoteActualizado(loteId);
         return "lote/confirmacionLote";
     }
+
+
 }

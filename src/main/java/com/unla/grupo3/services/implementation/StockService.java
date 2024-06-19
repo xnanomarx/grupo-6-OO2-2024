@@ -4,9 +4,9 @@ import com.unla.grupo3.entities.Producto;
 import com.unla.grupo3.entities.Stock;
 import com.unla.grupo3.repositories.IProductoRepository;
 import com.unla.grupo3.repositories.IStockRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +17,9 @@ public class StockService {
     @Autowired
     private IStockRepository stockRepository;
 
+    @Autowired
+    private IProductoRepository productoRepository;
+
     public void actualizarCantidad(int id, int cantidad) {
         stockRepository.actualizarCantidadStock(id, cantidad);
     }
@@ -24,6 +27,8 @@ public class StockService {
     public List<Stock> getStocks() {
         return stockRepository.findAll();
     }
+
+    private ProductoService productoService;
 
     public StockService(IStockRepository stockRepository) {
         this.stockRepository = stockRepository;
@@ -74,5 +79,4 @@ public class StockService {
     public void actualizarProducto(Stock stock) {
         stockRepository.actualizarStock(stock.getId(), stock.getCantExistente(), stock.getCantMinima());
     }
-
 }

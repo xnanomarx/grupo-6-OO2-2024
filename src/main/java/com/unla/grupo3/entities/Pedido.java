@@ -36,4 +36,10 @@ public class Pedido {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
+    public Pedido(Producto producto, int cantFaltante, String proveedor, String usuario) {
+        this.producto = producto;
+        this.cantFaltante = cantFaltante;
+        this.proveedor = proveedor;
+        this.usuario = usuario;
+    }
 }
