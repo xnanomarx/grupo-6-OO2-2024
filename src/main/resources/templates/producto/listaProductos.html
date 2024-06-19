@@ -42,7 +42,9 @@
             </form>
         </td>
         <td>
-            <button class="alerta" th:if="${stock.cantExistente} < ${stock.cantMinima}">Alerta de Abastecimiento</button>
+            <div class="bottom-link">
+                <a href="#" class="link" th:if="${stock.cantExistente} &lt; ${stock.cantMinima}" onclick="redirectToPedido()">Alerta de abastecimiento</a>
+            </div>
         </td>
     </tr>
     </tbody>

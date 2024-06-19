@@ -3,6 +3,8 @@ package com.unla.grupo3.controllers;
 import com.unla.grupo3.entities.UserRole;
 import com.unla.grupo3.services.implementation.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import org.springframework.security.core.userdetails.User;
@@ -47,16 +49,27 @@ public class UserController {
 
 	@GetMapping("/loginsuccess")
 	public String loginCheck() {
-		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		//user.getUserRoles()
-		return "redirect:/user";
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		// Verificar si el usuario tiene el rol ADMIN
+		if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
+			return ViewRouteHelper.INDEX;
+		}
+
+		// Verificar si el usuario tiene el rol USER
+		if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_USER"))) {
+			return ViewRouteHelper.USER;
+		}
+
+		// Por defecto, redirigir a una página de error o a la página principal
+		return "redirect:/";
 	}
 
 	@GetMapping("/user")
 	public String userHome(Model model) {
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		model.addAttribute("username", user.getUsername());
-		return ViewRouteHelper.INDEX;
+		return ViewRouteHelper.USER;
 	}
 
 	@GetMapping("/formregister")
