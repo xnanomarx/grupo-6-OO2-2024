@@ -25,11 +25,6 @@ public class LoteController {
         return "lote/lotes";
     }
 
-    @GetMapping("/ingresoLote")
-    public String mostrarFormularioIngresoLote(){
-        return "lote/ingresoLote";
-    }
-
     @PostMapping("/actualizar-stock")
     public String actualizarStock(@RequestParam("loteId") int loteId){
         loteService.actualizarStock(loteId);
