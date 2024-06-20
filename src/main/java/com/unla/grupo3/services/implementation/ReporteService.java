@@ -19,7 +19,6 @@ public class ReporteService {
     private StockService stockService;
 
     public Stock getProductoConMasStock(){
-        //List<Producto> productosConMasStock = productoRepository.findProductoConMasStock();
         List<Stock> productosConMasStock = stockService.encontrarProductoConMasStock();
         return productosConMasStock.isEmpty() ? null : productosConMasStock.get(0);
     }
